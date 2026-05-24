@@ -49,7 +49,7 @@
     <div class="hero-screen">
       <div class="phone-frame">
         <div class="phone-screen">
-          <img src="screenshots/01-home-en.png" alt="Kymar Home tab showing streak card and curriculum grid" loading="eager" decoding="async">
+          <img src="screenshots/04-stats-en.png" alt="Kymar Stats showing 84 attempts, 76% accuracy and a 14-day activity chart" loading="eager" decoding="async">
         </div>
       </div>
     </div>
@@ -60,38 +60,73 @@
   <div class="container">
     <h2>Take the tour.</h2>
     <p class="screens-sub">Five tabs, one routine. Daily 5-minute drills mapped to the concepts behind the music.</p>
-    <div class="screens-strip">
+  </div>
+  <!-- Auto-scrolling marquee. The track contains the 5 figures twice
+       (set A + set B aria-hidden) so the CSS animation loops seamlessly
+       on a -50% translate. Pauses on hover so users can read captions
+       and study a particular screen. -->
+  <div class="marquee">
+    <div class="marquee-track">
       <figure>
-        <div class="phone-frame">
-          <div class="phone-screen">
-            <img src="screenshots/02-train-en.png" alt="Intervals trainer with target play button and answer grid" loading="lazy" decoding="async">
-          </div>
-        </div>
-        <figcaption><strong>Train</strong>Identify intervals by ear. Settings tune the pool.</figcaption>
+        <div class="phone-frame"><div class="phone-screen">
+          <img src="screenshots/02-train-en.png" alt="Intervals trainer with 12-button answer grid and Play button" loading="lazy" decoding="async">
+        </div></div>
+        <figcaption><strong>Train</strong>Identify intervals by ear.</figcaption>
       </figure>
       <figure>
-        <div class="phone-frame">
-          <div class="phone-screen">
-            <img src="screenshots/03-compose-en.png" alt="Compose pad with chord timeline across multiple bars" loading="lazy" decoding="async">
-          </div>
-        </div>
-        <figcaption><strong>Compose</strong>Sketch progressions, hear them through the trainer sampler.</figcaption>
+        <div class="phone-frame"><div class="phone-screen">
+          <img src="screenshots/04-stats-en.png" alt="Stats overall view with last-14-days chart and per-module accuracy" loading="lazy" decoding="async">
+        </div></div>
+        <figcaption><strong>Stats</strong>Per-module accuracy, no inflated celebrations.</figcaption>
       </figure>
       <figure>
-        <div class="phone-frame">
-          <div class="phone-screen">
-            <img src="screenshots/04-stats-en.png" alt="Stats with accuracy charts and confusion matrix" loading="lazy" decoding="async">
-          </div>
-        </div>
-        <figcaption><strong>Stats</strong>Confusion matrices show what you mix up most.</figcaption>
+        <div class="phone-frame"><div class="phone-screen">
+          <img src="screenshots/01-home-en.png" alt="Home tab with the curriculum grid of 7 trainer modules" loading="lazy" decoding="async">
+        </div></div>
+        <figcaption><strong>Home</strong>7 trainer modules in one launcher.</figcaption>
       </figure>
       <figure>
-        <div class="phone-frame">
-          <div class="phone-screen">
-            <img src="screenshots/05-you-en.png" alt="You tab with profile, subscription status and customization" loading="lazy" decoding="async">
-          </div>
-        </div>
-        <figcaption><strong>You</strong>Search-driven settings, subscription, customization.</figcaption>
+        <div class="phone-frame"><div class="phone-screen">
+          <img src="screenshots/03-compose-en.png" alt="Compose pad with 8-bar chord timeline and tempo control" loading="lazy" decoding="async">
+        </div></div>
+        <figcaption><strong>Compose</strong>Sketch progressions, hear them back.</figcaption>
+      </figure>
+      <figure>
+        <div class="phone-frame"><div class="phone-screen">
+          <img src="screenshots/05-you-en.png" alt="You tab with appearance, audio and daily-goal preferences" loading="lazy" decoding="async">
+        </div></div>
+        <figcaption><strong>You</strong>Theme, instrument, sync, MIDI input.</figcaption>
+      </figure>
+      <!-- Duplicate set for seamless loop -->
+      <figure aria-hidden="true">
+        <div class="phone-frame"><div class="phone-screen">
+          <img src="screenshots/02-train-en.png" alt="" loading="lazy" decoding="async">
+        </div></div>
+        <figcaption><strong>Train</strong>Identify intervals by ear.</figcaption>
+      </figure>
+      <figure aria-hidden="true">
+        <div class="phone-frame"><div class="phone-screen">
+          <img src="screenshots/04-stats-en.png" alt="" loading="lazy" decoding="async">
+        </div></div>
+        <figcaption><strong>Stats</strong>Per-module accuracy, no inflated celebrations.</figcaption>
+      </figure>
+      <figure aria-hidden="true">
+        <div class="phone-frame"><div class="phone-screen">
+          <img src="screenshots/01-home-en.png" alt="" loading="lazy" decoding="async">
+        </div></div>
+        <figcaption><strong>Home</strong>7 trainer modules in one launcher.</figcaption>
+      </figure>
+      <figure aria-hidden="true">
+        <div class="phone-frame"><div class="phone-screen">
+          <img src="screenshots/03-compose-en.png" alt="" loading="lazy" decoding="async">
+        </div></div>
+        <figcaption><strong>Compose</strong>Sketch progressions, hear them back.</figcaption>
+      </figure>
+      <figure aria-hidden="true">
+        <div class="phone-frame"><div class="phone-screen">
+          <img src="screenshots/05-you-en.png" alt="" loading="lazy" decoding="async">
+        </div></div>
+        <figcaption><strong>You</strong>Theme, instrument, sync, MIDI input.</figcaption>
       </figure>
     </div>
   </div>

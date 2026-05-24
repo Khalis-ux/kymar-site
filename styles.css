@@ -166,7 +166,7 @@ a:hover { text-decoration: underline; }
   display: block;
 }
 
-/* — Screens gallery — */
+/* — Screens marquee (auto-scrolling carousel) — */
 
 .screens {
   padding: 80px 0 40px;
@@ -182,40 +182,73 @@ a:hover { text-decoration: underline; }
 }
 .screens-sub {
   text-align: center; color: var(--text-dim);
-  max-width: 560px; margin: 0 auto 48px;
+  max-width: 560px; margin: 0 auto 36px;
   font-size: 15px; line-height: 1.55;
 }
-.screens-strip {
-  display: flex; gap: 28px;
-  overflow-x: auto; scroll-snap-type: x mandatory;
-  padding: 16px 4px 28px;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: thin;
-  scrollbar-color: var(--divider) transparent;
+
+/* Full-bleed marquee viewport — escapes the .container so the strip
+   appears edge-to-edge. The gradient mask fades the leftmost and
+   rightmost ~6% to transparent so cards flow in/out cleanly instead
+   of being chopped at the viewport edge. */
+.marquee {
+  overflow: hidden;
+  padding: 16px 0 28px;
+  -webkit-mask-image: linear-gradient(to right,
+    transparent 0%, #000 6%, #000 94%, transparent 100%);
+          mask-image: linear-gradient(to right,
+    transparent 0%, #000 6%, #000 94%, transparent 100%);
 }
-.screens-strip::-webkit-scrollbar { height: 6px; }
-.screens-strip::-webkit-scrollbar-thumb {
-  background: var(--divider); border-radius: 3px;
+
+/* The track holds 10 figures (5 unique × 2 for the loop). It
+   animates from translateX(0) to translateX(-50% - half-gap): when
+   the first set is fully off-screen, the duplicate set is in the
+   exact same visual position, so the loop is invisible. 45s =
+   comfortable reading pace. `will-change` keeps the layer on the
+   compositor. */
+.marquee-track {
+  display: flex;
+  gap: 28px;
+  width: max-content;
+  animation: kymar-scroll 45s linear infinite;
+  will-change: transform;
 }
-.screens-strip figure {
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track {
+  animation-play-state: paused;
+}
+@keyframes kymar-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(-50% - 14px)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+  .marquee {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-left: 22px; padding-right: 22px;
+  }
+  .marquee figure { scroll-snap-align: center; }
+}
+
+.marquee figure {
   margin: 0; flex: 0 0 auto;
-  scroll-snap-align: center;
   display: flex; flex-direction: column; align-items: center; gap: 14px;
 }
-.screens-strip .phone-frame {
-  width: 240px;
+.marquee .phone-frame {
+  width: 220px;
   transition: transform .25s ease, box-shadow .25s ease;
 }
-.screens-strip .phone-frame:hover {
+.marquee .phone-frame:hover {
   transform: translateY(-4px) scale(1.015);
   box-shadow: 0 40px 90px rgba(0,0,0,0.7),
               0 6px 24px rgba(200, 255, 77, 0.15);
 }
-.screens-strip figcaption {
+.marquee figcaption {
   font-size: 12px; color: var(--text-dim); text-align: center;
-  max-width: 240px; line-height: 1.45;
+  max-width: 220px; line-height: 1.45;
 }
-.screens-strip figcaption strong {
+.marquee figcaption strong {
   display: block; color: var(--text);
   font-size: 14px; font-weight: 700; letter-spacing: 0.1px;
   margin-bottom: 2px;
