@@ -111,11 +111,16 @@ a:hover { text-decoration: underline; }
   max-width: 580px;
   margin: 0 auto 36px;
 }
-.hero-cta { margin-bottom: 60px; }
+.hero-cta {
+  margin-bottom: 60px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
 
-.btn-appstore {
+.btn-store {
   display: inline-flex; align-items: center;
-  background: var(--text); color: var(--bg);
   padding: 14px 24px;
   border-radius: 12px;
   font-weight: 600;
@@ -123,9 +128,20 @@ a:hover { text-decoration: underline; }
   line-height: 1.2;
   transition: transform 0.15s ease;
 }
-.btn-appstore:hover { text-decoration: none; transform: translateY(-1px); }
-.btn-appstore .badge-text { display: inline-block; text-align: left; }
-.btn-appstore strong { font-size: 18px; font-weight: 800; }
+.btn-store:hover { text-decoration: none; transform: translateY(-1px); }
+.btn-store .badge-text { display: inline-block; text-align: left; }
+.btn-store strong { font-size: 18px; font-weight: 800; }
+
+/* Primary CTA — iOS, filled */
+.btn-appstore { background: var(--text); color: var(--bg); }
+
+/* Secondary CTA — Android announcement, outlined to read as "not yet" */
+.btn-playstore {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--divider);
+}
+.btn-playstore strong { color: var(--accent, var(--text)); }
 
 /* — Hero screenshot placeholder — */
 
