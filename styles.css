@@ -2,6 +2,8 @@
    so the web identity matches the iOS one (same bg, accent, type). */
 
 :root {
+  /* Default = Studio (dark) palette. Mirrors `Palette.studio` from
+     the iOS app at /Users/vittorio/Kymar-Swift/Kymar/Core/Theme.swift. */
   --bg: #0a0b0f;
   --surface: #141620;
   --surface-hi: #1d2030;
@@ -13,9 +15,46 @@
   --danger: #ff6b6b;
   --success: #7ee787;
 
+  /* Ambient-blob tint variables — pulled out so the Olive theme can
+     swap them to warmer hues that read on cream paper without
+     clashing with the forest-green accent. */
+  --blob-1: rgba(200, 255, 77, 0.55);   /* accent glow */
+  --blob-2: rgba(90, 185, 255, 0.45);   /* secondary glow */
+
+  /* Sticky-header translucent backdrop. Per-theme so the blur reads
+     against each palette's bg without going grey. */
+  --header-bg: rgba(10, 11, 15, 0.85);
+  /* Phone-frame "bezel" gradient (the thin border around the
+     screenshot). On Studio it's a dark-navy gradient; on Olive it
+     becomes a warm cream so the phone reads as a real device on
+     paper, not a misplaced dark cell. */
+  --phone-bezel: linear-gradient(180deg, #232735, #14161e);
+
   --radius: 14px;
   --radius-sm: 9px;
   --max: 1080px;
+}
+
+/* Olive (light/day) theme — toggled by the .theme-toggle button in
+   the header, which sets `data-theme="olive"` on <html>. Mirrors
+   `Palette.olive` from the iOS app: cream paper bg, forest-green
+   accent, near-black text. The blob tints shift to amber + soft
+   olive so they read on the lighter background. */
+html[data-theme="olive"] {
+  --bg: #ece7d6;
+  --surface: #f4f0e2;
+  --surface-hi: #fbf8ed;
+  --text: #1c211a;
+  --text-dim: #5b5d4f;
+  --accent: #355d20;
+  --secondary: #2e5876;
+  --divider: #dfd9c5;
+  --danger: #9c3530;
+  --success: #1f6e5a;
+  --blob-1: rgba(53, 93, 32, 0.28);
+  --blob-2: rgba(46, 88, 118, 0.20);
+  --header-bg: rgba(236, 231, 214, 0.85);
+  --phone-bezel: linear-gradient(180deg, #b8a987, #8e7e5d);
 }
 
 * { box-sizing: border-box; }
@@ -33,6 +72,10 @@ body {
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Smooth fade between Studio + Olive when the theme toggle flips
+     the data-theme attribute. Otherwise the whole page snaps and
+     feels broken. */
+  transition: background-color 0.35s ease, color 0.35s ease;
 }
 
 a { color: var(--accent); text-decoration: none; }
@@ -48,10 +91,11 @@ a:hover { text-decoration: underline; }
 
 .site-header {
   position: sticky; top: 0; z-index: 10;
-  background: rgba(10, 11, 15, 0.85);
+  background: var(--header-bg);
   -webkit-backdrop-filter: saturate(180%) blur(10px);
   backdrop-filter: saturate(180%) blur(10px);
   border-bottom: 1px solid var(--divider);
+  transition: background 0.35s ease, border-color 0.35s ease;
 }
 .header-inner {
   display: flex; align-items: center; gap: 16px;
@@ -94,6 +138,29 @@ a:hover { text-decoration: underline; }
 }
 .lang-switch:hover { color: var(--text); border-color: var(--text-dim); text-decoration: none; }
 
+/* Day/night theme toggle pill — sits next to the lang switch in the
+   header. Same shape as `.lang-switch` so the two read as a pair
+   instead of competing widgets. The glyph (☾ / ☀) is swapped by
+   app.js when the user flips themes. */
+.theme-toggle {
+  appearance: none;
+  background: transparent;
+  color: var(--text-dim);
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1;
+  border: 1px solid var(--divider);
+  border-radius: 6px;
+  width: 30px; height: 28px;
+  display: inline-flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+.theme-toggle:hover {
+  color: var(--text);
+  border-color: var(--text-dim);
+}
+
 /* — Hero — */
 
 .hero {
@@ -108,27 +175,29 @@ a:hover { text-decoration: underline; }
    hero. Static gradient meshes look flat; animated ones read as
    "this page is alive". Period is intentionally long (45s+50s, out
    of phase) so the motion is ambient rather than distracting.
-   Pointer-events: none keeps them inert under the CTA buttons. */
+   Pointer-events: none keeps them inert under the CTA buttons.
+   Visibility-bumped (opacity inside `--blob-X`, blur 50px not 80px)
+   so they actually read against the bg instead of dissolving. */
 .hero::before,
 .hero::after {
   content: '';
   position: absolute;
-  width: 70vw; height: 70vw;
-  max-width: 720px; max-height: 720px;
+  width: 80vw; height: 80vw;
+  max-width: 820px; max-height: 820px;
   border-radius: 50%;
-  filter: blur(80px);
+  filter: blur(50px);
   pointer-events: none;
   z-index: 0;
   will-change: transform, opacity;
 }
 .hero::before {
-  top: -20vw; left: -15vw;
-  background: radial-gradient(circle at center, rgba(200,255,77,0.22) 0%, transparent 65%);
+  top: -15vw; left: -20vw;
+  background: radial-gradient(circle at center, var(--blob-1) 0%, transparent 65%);
   animation: blobDrift1 45s ease-in-out infinite;
 }
 .hero::after {
-  bottom: -25vw; right: -15vw;
-  background: radial-gradient(circle at center, rgba(90,185,255,0.18) 0%, transparent 65%);
+  bottom: -20vw; right: -20vw;
+  background: radial-gradient(circle at center, var(--blob-2) 0%, transparent 65%);
   animation: blobDrift2 50s ease-in-out infinite;
 }
 .hero .container { position: relative; z-index: 1; }
@@ -172,21 +241,9 @@ a:hover { text-decoration: underline; }
   font-weight: 600;
   font-size: 14px;
   line-height: 1.2;
-  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
-              box-shadow 0.3s ease;
+  transition: transform 0.15s ease;
 }
-/* Springy hover — the cubic-bezier overshoots past 1.0 so the badge
-   springs forward and settles. The +6px lift + accent-tinted shadow
-   reads as "press me" without going as far as bubble-animation. */
-.btn-store:hover {
-  text-decoration: none;
-  transform: translateY(-6px) scale(1.03);
-  box-shadow: 0 12px 28px rgba(200, 255, 77, 0.18);
-}
-.btn-store:active {
-  transform: translateY(-2px) scale(0.99);
-  transition-duration: 0.12s;
-}
+.btn-store:hover { text-decoration: none; transform: translateY(-1px); }
 .btn-store .badge-text { display: inline-block; text-align: left; }
 .btn-store strong { font-size: 18px; font-weight: 800; }
 
@@ -214,7 +271,7 @@ a:hover { text-decoration: underline; }
 .phone-frame {
   width: min(280px, 70vw);
   padding: 10px;
-  background: linear-gradient(180deg, #232735, #14161e);
+  background: var(--phone-bezel);
   border-radius: 36px;
   border: 1px solid var(--divider);
   box-shadow: 0 30px 80px rgba(0,0,0,0.6),
@@ -545,140 +602,10 @@ a:hover { text-decoration: underline; }
   .features, .pricing { padding: 60px 0; }
 }
 
-/* — Interactive demo (interval-ID drill in the browser) — */
-
-.demo {
-  padding: 40px 0 80px;
-  position: relative;
-}
-.demo .container { max-width: 640px; }
-.demo h2 {
-  text-align: center;
-  font-size: clamp(24px, 3.4vw, 32px);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  margin: 0 0 6px;
-  font-family: ui-rounded, "SF Pro Rounded", -apple-system, sans-serif;
-}
-.demo > .container > p {
-  text-align: center;
-  color: var(--text-dim);
-  margin: 0 0 22px;
-  font-size: 14px;
-}
-.demo-card {
-  background: var(--surface);
-  border: 1px solid var(--divider);
-  border-radius: 20px;
-  padding: 24px;
-  /* Subtle accent halo so the card reads as the "magic" interactive
-     element on the page, distinct from the static feature cards. */
-  box-shadow: 0 18px 60px rgba(200, 255, 77, 0.06);
-}
-.demo-play {
-  width: 100%;
-  background: var(--accent);
-  color: var(--bg);
-  font-weight: 700;
-  font-size: 16px;
-  font-family: inherit;
-  border: 0;
-  border-radius: 14px;
-  padding: 16px;
-  cursor: pointer;
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
-              box-shadow 0.3s ease, opacity 0.2s ease;
-}
-.demo-play:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 26px rgba(200, 255, 77, 0.25);
-}
-.demo-play:active { transform: scale(0.98); }
-.demo-options {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-top: 14px;
-}
-.demo-options button {
-  background: var(--surface-hi);
-  color: var(--text);
-  border: 1px solid var(--divider);
-  border-radius: 10px;
-  padding: 14px 10px;
-  font-family: inherit;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  /* Disabled by default — the user must Play first to unlock
-     answering, otherwise they'd be picking blind. */
-  opacity: 0.45;
-  pointer-events: none;
-  transition: background 0.2s ease, transform 0.18s ease, opacity 0.2s ease,
-              border-color 0.2s ease, color 0.2s ease;
-}
-/* Once an interval is in flight (and not yet answered), the buttons
-   light up and become tappable. JS sets data-state="playing" on the
-   sibling .demo-feedback when this is true. */
-.demo-feedback[data-state="playing"] ~ .demo-options button,
-.demo-options button:not([disabled]) {
-  opacity: 1;
-  pointer-events: auto;
-}
-.demo-options button:not([disabled]):hover {
-  border-color: var(--accent);
-  transform: translateY(-2px);
-}
-/* Reveal colours after answer — green wash for the right answer,
-   red wash for the wrong pick, neutral for the rest. */
-.demo-options button[data-judged="correct"] {
-  background: var(--success);
-  color: var(--bg);
-  border-color: var(--success);
-  opacity: 1;
-}
-.demo-options button[data-judged="wrong"] {
-  background: var(--danger);
-  color: var(--bg);
-  border-color: var(--danger);
-  opacity: 1;
-}
-.demo-feedback {
-  margin-top: 16px;
-  min-height: 22px;
-  font-size: 14px;
-  text-align: center;
-  color: var(--text-dim);
-}
-.demo-feedback strong { color: var(--text); }
-.demo-feedback > span { display: none; }
-.demo-feedback[data-state="idle"]    .demo-msg-idle    { display: inline; }
-.demo-feedback[data-state="playing"] .demo-msg-idle    { display: inline; opacity: 0.65; }
-.demo-feedback[data-state="correct"] .demo-msg-correct { display: inline; color: var(--success); }
-.demo-feedback[data-state="wrong"]   .demo-msg-wrong   { display: inline; color: var(--danger); }
-.demo-next {
-  display: block;
-  margin: 14px auto 0;
-  background: transparent;
-  color: var(--accent);
-  border: 1px solid var(--accent);
-  border-radius: 10px;
-  padding: 10px 18px;
-  font-family: inherit;
-  font-weight: 600;
-  font-size: 13px;
-  cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease;
-}
-.demo-next:hover { background: var(--accent); color: var(--bg); }
-.demo-next[hidden] { display: none; }
-
-/* Respect the user's reduced-motion preference: kill the blob drift,
-   the phone tilt easing, and the bouncy button springs. Replaces all
-   motion with instant transitions so the page stays usable but stops
-   being "alive". Important for vestibular-sensitive users. */
+/* Respect the user's reduced-motion preference: freeze the ambient
+   blobs and the phone-tilt easing. Important for vestibular-
+   sensitive users. */
 @media (prefers-reduced-motion: reduce) {
   .hero::before, .hero::after { animation: none; }
-  .btn-store, .phone-frame, .demo-play, .demo-options button { transition: none; }
-  .btn-store:hover, .demo-play:hover { transform: none; }
+  .phone-frame { transition: none; }
 }
