@@ -608,49 +608,135 @@ a:hover { text-decoration: underline; }
   margin-bottom: 2px;
 }
 
-/* — Features — */
+/* — Modules section ("Inside Kymar — Eight modules. One routine.") — */
 
-.features { padding: 80px 0; border-top: 1px solid var(--divider); }
-.features h2 {
-  font-size: clamp(28px, 4vw, 40px);
-  text-align: center;
-  margin: 0 0 50px;
+.modules {
+  padding: 90px 0 100px;
+  border-top: 1px solid var(--divider);
+}
+/* Small pill label above the section heading — green dot + uppercase
+   tracked text. Used to scope the heading ("we're talking about the
+   app's internals now") without taking the visual weight of an h2. */
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border: 1px solid var(--divider);
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text);
+  background: var(--surface);
+  margin-bottom: 22px;
+}
+.section-label::before {
+  content: '';
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  /* Slight glow ring so the dot reads as alive against any bg. */
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent);
+}
+.modules-h {
+  font-size: clamp(40px, 7vw, 72px);
   font-weight: 800;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+  margin: 0 0 22px;
   font-family: ui-rounded, "SF Pro Rounded", -apple-system, sans-serif;
 }
-
-.feature-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 16px;
-}
-.feature {
-  background: var(--surface);
-  padding: 24px;
-  border-radius: var(--radius);
-  border: 1px solid var(--divider);
-}
-.feature-icon {
-  display: inline-flex;
-  width: 38px; height: 38px;
-  align-items: center; justify-content: center;
-  background: var(--surface-hi);
-  border-radius: 9px;
-  font-size: 18px;
-  color: var(--accent);
-  margin-bottom: 16px;
-}
-.feature h3 {
-  margin: 0 0 8px;
-  font-size: 17px;
-  font-weight: 700;
-}
-.feature p {
-  margin: 0;
-  font-size: 13px;
+.section-sub {
+  margin: 0 0 50px;
+  font-size: clamp(15px, 1.4vw, 17px);
   color: var(--text-dim);
-  line-height: 1.5;
+  max-width: 620px;
+  line-height: 1.55;
+}
+.module-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+.module-card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--divider);
+  border-radius: 18px;
+  padding: 24px 22px 60px;
+  min-height: 230px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease, border-color 0.25s ease,
+              box-shadow 0.25s ease;
+}
+.module-card:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--accent) 35%, var(--divider));
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.18);
+}
+.module-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 36px;
+}
+.module-icon {
+  color: var(--accent);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.module-icon svg {
+  width: 28px; height: 28px;
+}
+.module-tag {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: var(--text-dim);
+}
+.module-card h3 {
+  margin: 0 0 10px;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  font-family: ui-rounded, "SF Pro Rounded", -apple-system, sans-serif;
+}
+.module-card p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-dim);
+  line-height: 1.55;
+}
+/* Pro / Microtonal corner badge — bottom-right of the card, calls
+   out tiers the user needs to upgrade for. Monospaced for the same
+   "system tag" feel as the M# label on the opposite corner. */
+.module-badge {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  padding: 4px 9px;
+  border-radius: 6px;
+  background: var(--surface-hi);
+  border: 1px solid var(--divider);
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+@media (max-width: 980px) {
+  .module-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 520px) {
+  .module-grid { grid-template-columns: 1fr; }
+  .modules { padding: 70px 0 80px; }
 }
 .pro-tag {
   display: inline-block;
