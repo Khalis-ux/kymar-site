@@ -381,6 +381,33 @@ a:hover { text-decoration: underline; }
   color: var(--text-dim);
   letter-spacing: 0.04em;
 }
+/* Inline unit ("/mo") next to the headline monthly price. Smaller +
+   dimmer so the $2.99 dominates and the "/mo" reads as a footnote. */
+.plan-price-unit {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-dim);
+  font-family: inherit;
+}
+/* Yearly + Lifetime line directly under the monthly price — sells
+   the lifetime tier without bumping it into a separate card. */
+.plan-price-alt {
+  margin: -10px 0 18px;
+  font-size: 13px;
+  color: var(--text-dim);
+}
+.plan-price-alt strong {
+  color: var(--text);
+  font-family: ui-rounded, "SF Pro Rounded", -apple-system, sans-serif;
+}
+/* Reuses the hero-cta layout but sits at the bottom of the pricing
+   section so the user has a download button in reach after reading
+   features + pricing — without scrolling all the way back to the
+   hero. Slight top margin separates it from the plan grid. */
+.pricing-cta {
+  margin-top: 36px;
+  justify-content: center;
+}
 
 /* — Footer — */
 
