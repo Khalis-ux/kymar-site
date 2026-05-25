@@ -683,13 +683,14 @@ a:hover { text-decoration: underline; }
               box-shadow 0.25s ease;
 }
 .module-card:hover {
-  /* Same accent-border + lift + soft shadow treatment as .why-card,
-     so the Why-Kymar cards and the 8 module cards feel like one
-     coherent design language. Subtle enough that all 8 modules stay
-     equally reachable — no "highlighted" outlier. */
+  /* Punchier than .why-card:hover because module cards are taller
+     (~200pt min vs ~150pt) — same -2pt lift looked muted on the bigger
+     surface area. Same direction of treatment (accent border + lift +
+     soft shadow), just dialled to compensate for card scale so the
+     hover reads from the same distance as the Why-Kymar cards. */
   border-color: var(--accent);
-  transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
 }
 .module-card-head {
   display: flex;
