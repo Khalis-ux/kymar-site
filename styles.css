@@ -337,6 +337,176 @@ a:hover { text-decoration: underline; }
   display: block;
 }
 
+/* — Why Kymar — four-up pitch grid sitting between hero and the
+   screenshots marquee. Cards use the same surface/divider tokens as
+   the rest of the site, so flipping between Studio and Olive themes
+   inverts them along with everything else. The per-card visuals are
+   inline SVGs that style themselves via `var(--accent)` / `var(--text)`
+   etc., so the illustrations track the theme too — no asset swap
+   needed for day/night. */
+
+.why-kymar {
+  padding: 96px 0 64px;
+  border-top: 1px solid var(--divider);
+}
+.why-kymar-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+.why-kymar-head {
+  text-align: left;
+  max-width: 720px;
+}
+.why-kymar-pill {
+  /* Reuse the existing pill chip styling already used by other
+     section labels. Defined inline here in case .pill isn't already
+     a global utility. */
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--divider);
+  color: var(--text);
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 1.6px;
+  font-family: ui-monospace, Menlo, "SF Mono", monospace;
+}
+.why-kymar-pill::before {
+  /* Small green dot to anchor the eye to the section start. */
+  content: "";
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.why-kymar-title {
+  font-size: clamp(36px, 5vw, 56px);
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+  font-weight: 800;
+  font-family: ui-rounded, "SF Pro Rounded", -apple-system, sans-serif;
+  margin: 16px 0 16px;
+  color: var(--text);
+}
+.why-kymar-sub {
+  color: var(--text-dim);
+  font-size: 17px;
+  line-height: 1.55;
+  margin: 0;
+  max-width: 560px;
+}
+
+/* Two-column grid on desktop, single column on phones. CSS Grid
+   keeps every card the same height even when bodies wrap to
+   different line counts. */
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+@media (max-width: 720px) {
+  .why-grid { grid-template-columns: 1fr; gap: 20px; }
+  .why-kymar { padding: 64px 0 40px; }
+  .why-kymar-title { font-size: clamp(28px, 7vw, 36px); }
+}
+
+.why-card {
+  background: var(--surface);
+  border: 1px solid var(--divider);
+  border-radius: 20px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: transform 0.25s ease, border-color 0.25s ease,
+              box-shadow 0.25s ease;
+}
+.why-card:hover {
+  /* Mirrors the active-accent border the user saw on the second
+     card in the design — a subtle hover state instead of a static
+     "highlighted card" so all four feel reachable. */
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+}
+
+.why-card-visual {
+  background: var(--surface-hi);
+  border: 1px solid var(--divider);
+  border-radius: 14px;
+  padding: 18px 22px;
+  min-height: 152px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.why-svg {
+  width: 100%;
+  height: auto;
+  max-height: 130px;
+  display: block;
+}
+.why-card-label {
+  /* Mini pill identical in shape to .why-kymar-pill but smaller and
+     without the dot — keeps the 01/02/03/04 numbering visually
+     grouped without competing with the section pill above. */
+  align-self: flex-start;
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: var(--surface-hi);
+  border: 1px solid var(--divider);
+  color: var(--text-dim);
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 1.4px;
+  font-family: ui-monospace, Menlo, "SF Mono", monospace;
+  margin-top: 4px;
+}
+.why-card-title {
+  font-size: 22px;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  font-weight: 800;
+  font-family: ui-rounded, "SF Pro Rounded", -apple-system, sans-serif;
+  margin: 4px 0 2px;
+  color: var(--text);
+}
+.why-card-body {
+  color: var(--text-dim);
+  font-size: 14.5px;
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* Compose-card chord pill mock. Five rectangles in a row, middle
+   one filled in accent green to read as "this is the chord currently
+   selected on the Compose pad". */
+.why-chords {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.chord-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 52px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: var(--surface);
+  border: 1px solid var(--divider);
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 700;
+  font-family: ui-monospace, Menlo, "SF Mono", monospace;
+}
+.chord-pill.is-active {
+  background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
+}
+
 /* — Screens marquee (auto-scrolling carousel) — */
 
 .screens {
