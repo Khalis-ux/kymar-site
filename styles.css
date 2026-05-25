@@ -109,12 +109,15 @@ a:hover { text-decoration: underline; }
 .brand:hover { text-decoration: none; }
 .brand-mark {
   width: 28px; height: 28px;
-  background: var(--accent); color: var(--bg);
   border-radius: 7px;
-  display: inline-flex; align-items: center; justify-content: center;
-  font-family: ui-rounded, "SF Pro Rounded", -apple-system, sans-serif;
-  font-weight: 800;
-  font-size: 16px;
+  /* The brand mark is now the actual iOS app icon (favicon-32.png).
+     `object-fit: cover` keeps it from squishing if it's served at
+     non-square aspect. The subtle border + shadow give it the
+     "device-rendered" look it has on the iOS home screen. */
+  object-fit: cover;
+  border: 1px solid var(--divider);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  vertical-align: middle;
 }
 .site-nav {
   margin-left: auto;
@@ -257,6 +260,19 @@ a:hover { text-decoration: underline; }
   transition-duration: 0.12s;
 }
 .btn-store .badge-text { display: inline-block; text-align: left; }
+/* Apple logo glyph that prefixes the App Store badge — matches the
+   visual structure of Apple's official "Download on the App Store"
+   artwork. Uses the Apple Logo character () which renders on iOS,
+   macOS and modern browsers with Apple Color Emoji or SF Pro fonts.
+   On systems without it the character is invisible (still works,
+   just less iconic). */
+.btn-store .badge-glyph {
+  font-size: 22px;
+  margin-right: 10px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+}
 .btn-store strong { font-size: 18px; font-weight: 800; }
 
 /* Primary CTA — iOS, filled */
@@ -614,10 +630,80 @@ a:hover { text-decoration: underline; }
   .features, .pricing { padding: 60px 0; }
 }
 
+/* — FAQ accordion (native <details>/<summary>) — */
+
+.faq {
+  padding: 50px 0 80px;
+}
+.faq .container { max-width: 760px; }
+.faq h2 {
+  text-align: center;
+  font-size: clamp(28px, 4vw, 38px);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  margin: 0 0 30px;
+  font-family: ui-rounded, "SF Pro Rounded", -apple-system, sans-serif;
+}
+.faq-list {
+  display: grid;
+  gap: 10px;
+}
+.faq details {
+  background: var(--surface);
+  border: 1px solid var(--divider);
+  border-radius: 12px;
+  padding: 4px 18px;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.faq details[open] {
+  background: var(--surface-hi);
+  border-color: var(--accent);
+}
+.faq summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 14px 0;
+  font-weight: 600;
+  font-size: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  color: var(--text);
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::marker { content: ''; }
+/* Trailing chevron — rotates 180° when the details is open. Uses a
+   CSS-rendered triangle so we don't need an SVG asset. */
+.faq summary::after {
+  content: '';
+  width: 8px; height: 8px;
+  border-right: 2px solid var(--text-dim);
+  border-bottom: 2px solid var(--text-dim);
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+  margin-right: 4px;
+}
+.faq details[open] summary::after {
+  transform: rotate(-135deg);
+  border-color: var(--accent);
+}
+.faq details > p {
+  margin: 0 0 14px;
+  padding-top: 4px;
+  color: var(--text-dim);
+  font-size: 14px;
+  line-height: 1.6;
+  border-top: 1px solid var(--divider);
+  padding-top: 14px;
+}
+.faq details > p a { color: var(--accent); }
+
 /* Respect the user's reduced-motion preference: freeze the ambient
    blobs and the phone-tilt easing. Important for vestibular-
    sensitive users. */
 @media (prefers-reduced-motion: reduce) {
   .hero::before, .hero::after { animation: none; }
-  .phone-frame { transition: none; }
+  .phone-frame, .faq details, .faq summary::after { transition: none; }
 }

@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#0a0b0f">
 <title>Kymar — 5 minutes a day, measurable ear-training progress</title>
 <meta name="description" content="Daily ear-training practice for musicians. Intervals, chords, melodies, rhythm, timbre. Free on the App Store. Android coming soon.">
-<link rel="stylesheet" href="styles.css?v=3">
+<link rel="stylesheet" href="styles.css?v=4">
 <link rel="canonical" href="https://khalis-ux.github.io/kymar-site/">
 <link rel="alternate" hreflang="en" href="https://khalis-ux.github.io/kymar-site/">
 <link rel="alternate" hreflang="it" href="https://khalis-ux.github.io/kymar-site/it/">
@@ -22,13 +22,47 @@
 <meta name="twitter:title" content="Kymar — 5 minutes a day, measurable ear-training progress">
 <meta name="twitter:description" content="Intervals, chords, melodies, rhythm — for musicians who want data, not gimmicks.">
 <meta name="twitter:image" content="https://khalis-ux.github.io/kymar-site/og-image.png">
+<!-- Favicon set generated from the iOS Marketing Icon (1024×1024).
+     16/32 are the browser-tab sizes; 180 is the iOS "Add to Home
+     Screen" touch icon. Apple's spec wants 180 without alpha — the
+     source PNG is opaque so the resample is safe. -->
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<!-- Schema.org SoftwareApplication payload so Google can render the
+     app as a rich result (name + price + screenshot) instead of a
+     generic blue link. Mirrors the pricing tiers and screenshots
+     declared visually in the page. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MobileApplication",
+  "name": "Kymar",
+  "description": "Daily ear-training practice for musicians. Intervals, chords, melodies, rhythm, timbre.",
+  "operatingSystem": "iOS 17+",
+  "applicationCategory": "EducationApplication",
+  "url": "https://khalis-ux.github.io/kymar-site/",
+  "image": "https://khalis-ux.github.io/kymar-site/og-image.png",
+  "screenshot": [
+    "https://khalis-ux.github.io/kymar-site/screenshots/02-train-en.png",
+    "https://khalis-ux.github.io/kymar-site/screenshots/01-home-en.png",
+    "https://khalis-ux.github.io/kymar-site/screenshots/04-stats-en.png"
+  ],
+  "offers": [
+    {"@type": "Offer", "price": "0",     "priceCurrency": "USD", "name": "Free"},
+    {"@type": "Offer", "price": "2.99",  "priceCurrency": "USD", "name": "Pro Monthly"},
+    {"@type": "Offer", "price": "19.99", "priceCurrency": "USD", "name": "Pro Yearly"},
+    {"@type": "Offer", "price": "24.99", "priceCurrency": "USD", "name": "Pro Lifetime"}
+  ]
+}
+</script>
 </head>
 <body>
 
 <header class="site-header">
   <div class="container header-inner">
-    <a href="./" class="brand">
-      <span class="brand-mark">K</span>
+    <a href="./" class="brand" aria-label="Kymar — home">
+      <img class="brand-mark" src="favicon-32.png" alt="" width="32" height="32" decoding="async">
       <span class="brand-name">Kymar</span>
     </a>
     <nav class="site-nav">
@@ -51,6 +85,7 @@
     <p class="hero-sub">Intervals, chords, melodies, rhythm and timbre — for musicians who want data, not gimmicks.</p>
     <div class="hero-cta">
       <a href="#" class="btn-store btn-appstore" aria-label="Download on the App Store">
+        <span class="badge-glyph" aria-hidden="true"></span>
         <span class="badge-text">Download on the<br><strong>App Store</strong></span>
       </a>
       <a href="#" class="btn-store btn-playstore" aria-label="Android version coming">
@@ -216,11 +251,44 @@
          making them scroll back to download is friction we can avoid. -->
     <div class="hero-cta pricing-cta">
       <a href="#" class="btn-store btn-appstore" aria-label="Download on the App Store">
+        <span class="badge-glyph" aria-hidden="true"></span>
         <span class="badge-text">Download on the<br><strong>App Store</strong></span>
       </a>
       <a href="#" class="btn-store btn-playstore" aria-label="Android version coming">
         <span class="badge-text">Android version<br><strong>coming soon</strong></span>
       </a>
+    </div>
+  </div>
+</section>
+
+<section class="faq" id="faq" aria-label="Frequently asked questions">
+  <div class="container">
+    <h2>Questions, answered.</h2>
+    <div class="faq-list">
+      <details>
+        <summary>Do I need an iPhone to use Kymar?</summary>
+        <p>Yes — Kymar is iOS-only for now (iOS 17 or later, iPhone and iPad). An Android version is on the roadmap; the project is one indie dev, so iOS comes first.</p>
+      </details>
+      <details>
+        <summary>Is the free version really free?</summary>
+        <p>Yes, forever. All 7 trainer modules, the daily goal, the streak, and the 26-chapter Field Guide are free. Pro adds 8 extra instruments, MIDI keyboard input, iCloud sync, detailed stats, spaced-repetition review and the microtonal trainer.</p>
+      </details>
+      <details>
+        <summary>Are my training stats private?</summary>
+        <p>Yes. Stats stay on your device by default — there is no Kymar server collecting them. The iCloud sync option (Pro) uses your own iCloud account, end-to-end through Apple's infrastructure. Read the full <a href="https://khalis-ux.github.io/kymar-policy/privacy-policy/">privacy policy</a> for the technical detail.</p>
+      </details>
+      <details>
+        <summary>Can I cancel anytime?</summary>
+        <p>Yes. Monthly and Yearly Pro plans auto-renew until cancelled — manage them in <em>Settings → Apple ID → Subscriptions</em>. Pro Lifetime is a single one-time purchase with no renewal. The 1-week free trial doesn't charge anything if you cancel before it ends.</p>
+      </details>
+      <details>
+        <summary>Do I need to be able to read music?</summary>
+        <p>No. Most trainers (Intervals, Chords, Melody, Rhythm, Timbre) work purely by ear and tap — no notation required. The Field Guide and the optional staff visualisations are there if you <em>want</em> to bridge ear to page.</p>
+      </details>
+      <details>
+        <summary>Can I use a MIDI keyboard?</summary>
+        <p>Yes, on Pro. USB, Bluetooth or network MIDI controllers feed straight into the trainers, so you can answer chord and interval drills on a real keyboard instead of tapping the screen.</p>
+      </details>
     </div>
   </div>
 </section>
@@ -244,6 +312,6 @@
   </div>
 </footer>
 
-<script src="app.js?v=3" defer></script>
+<script src="app.js?v=4" defer></script>
 </body>
 </html>

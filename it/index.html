@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#0a0b0f">
 <title>Kymar — 5 minuti al giorno, progressi misurabili nell'ear training</title>
 <meta name="description" content="Pratica quotidiana di ear training per musicisti. Intervalli, accordi, melodie, ritmo, timbro. Gratis su App Store. Versione Android in arrivo.">
-<link rel="stylesheet" href="../styles.css?v=3">
+<link rel="stylesheet" href="../styles.css?v=4">
 <link rel="canonical" href="https://khalis-ux.github.io/kymar-site/it/">
 <link rel="alternate" hreflang="en" href="https://khalis-ux.github.io/kymar-site/">
 <link rel="alternate" hreflang="it" href="https://khalis-ux.github.io/kymar-site/it/">
@@ -22,13 +22,40 @@
 <meta name="twitter:title" content="Kymar — 5 minuti al giorno, progressi misurabili nell'ear training">
 <meta name="twitter:description" content="Intervalli, accordi, melodie, ritmo — per musicisti che vogliono dati, non gadget.">
 <meta name="twitter:image" content="https://khalis-ux.github.io/kymar-site/og-image.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MobileApplication",
+  "name": "Kymar",
+  "description": "Pratica quotidiana di ear training per musicisti. Intervalli, accordi, melodie, ritmo, timbro.",
+  "operatingSystem": "iOS 17+",
+  "applicationCategory": "EducationApplication",
+  "url": "https://khalis-ux.github.io/kymar-site/it/",
+  "inLanguage": "it",
+  "image": "https://khalis-ux.github.io/kymar-site/og-image.png",
+  "screenshot": [
+    "https://khalis-ux.github.io/kymar-site/screenshots/02-train-it.png",
+    "https://khalis-ux.github.io/kymar-site/screenshots/01-home-it.png",
+    "https://khalis-ux.github.io/kymar-site/screenshots/04-stats-it.png"
+  ],
+  "offers": [
+    {"@type": "Offer", "price": "0",     "priceCurrency": "EUR", "name": "Gratis"},
+    {"@type": "Offer", "price": "2.99",  "priceCurrency": "EUR", "name": "Pro Mensile"},
+    {"@type": "Offer", "price": "19.99", "priceCurrency": "EUR", "name": "Pro Annuale"},
+    {"@type": "Offer", "price": "24.99", "priceCurrency": "EUR", "name": "Pro A vita"}
+  ]
+}
+</script>
 </head>
 <body>
 
 <header class="site-header">
   <div class="container header-inner">
-    <a href="./" class="brand">
-      <span class="brand-mark">K</span>
+    <a href="./" class="brand" aria-label="Kymar — home">
+      <img class="brand-mark" src="../favicon-32.png" alt="" width="32" height="32" decoding="async">
       <span class="brand-name">Kymar</span>
     </a>
     <nav class="site-nav">
@@ -51,6 +78,7 @@
     <p class="hero-sub">Intervalli, accordi, melodie, ritmo e timbro — per musicisti che vogliono dati, non gadget.</p>
     <div class="hero-cta">
       <a href="#" class="btn-store btn-appstore" aria-label="Scarica su App Store">
+        <span class="badge-glyph" aria-hidden="true"></span>
         <span class="badge-text">Scarica su<br><strong>App Store</strong></span>
       </a>
       <a href="#" class="btn-store btn-playstore" aria-label="Versione Android in arrivo">
@@ -190,11 +218,44 @@
          che debba scrollare fino in alto per scaricare. -->
     <div class="hero-cta pricing-cta">
       <a href="#" class="btn-store btn-appstore" aria-label="Scarica su App Store">
+        <span class="badge-glyph" aria-hidden="true"></span>
         <span class="badge-text">Scarica su<br><strong>App Store</strong></span>
       </a>
       <a href="#" class="btn-store btn-playstore" aria-label="Versione Android in arrivo">
         <span class="badge-text">Versione Android<br><strong>in arrivo</strong></span>
       </a>
+    </div>
+  </div>
+</section>
+
+<section class="faq" id="faq" aria-label="Domande frequenti">
+  <div class="container">
+    <h2>Domande, risposte.</h2>
+    <div class="faq-list">
+      <details>
+        <summary>Mi serve un iPhone per usare Kymar?</summary>
+        <p>Sì — al momento Kymar è solo iOS (iOS 17 o successivo, iPhone e iPad). La versione Android è nella roadmap; il progetto è un indie dev singolo, quindi iOS viene prima.</p>
+      </details>
+      <details>
+        <summary>La versione gratuita è davvero gratis?</summary>
+        <p>Sì, per sempre. Tutti e 7 i trainer, l'obiettivo giornaliero, la streak e la Guida pratica da 26 capitoli sono gratis. Pro aggiunge 8 strumenti extra, input tastiera MIDI, sync iCloud, statistiche dettagliate, ripasso a ripetizione dilazionata e il trainer microtonale.</p>
+      </details>
+      <details>
+        <summary>Le mie statistiche sono private?</summary>
+        <p>Sì. Per default le stats restano sul tuo dispositivo — nessun server di Kymar le raccoglie. Il sync iCloud (Pro) usa il tuo account iCloud, end-to-end attraverso l'infrastruttura di Apple. Dettagli nella <a href="https://khalis-ux.github.io/kymar-policy/privacy-policy/">privacy policy</a>.</p>
+      </details>
+      <details>
+        <summary>Posso disdire quando voglio?</summary>
+        <p>Sì. I piani Pro Mensile e Annuale si rinnovano automaticamente finché non li disdici — gestiscili da <em>Impostazioni → ID Apple → Abbonamenti</em>. Pro A vita è un acquisto unico, nessun rinnovo. La prova gratuita di 1 settimana non addebita nulla se disdici prima della scadenza.</p>
+      </details>
+      <details>
+        <summary>Devo saper leggere la musica?</summary>
+        <p>No. La maggior parte dei trainer (Intervalli, Accordi, Melodia, Ritmo, Timbro) funziona puramente a orecchio e tocco — niente notazione richiesta. La Guida pratica e le visualizzazioni opzionali sul pentagramma sono lì se <em>vuoi</em> collegare orecchio e pagina.</p>
+      </details>
+      <details>
+        <summary>Posso usare una tastiera MIDI?</summary>
+        <p>Sì, su Pro. Controller MIDI via USB, Bluetooth o rete vanno direttamente nei trainer, così rispondi agli esercizi di accordi e intervalli su una tastiera vera invece che toccando lo schermo.</p>
+      </details>
     </div>
   </div>
 </section>
@@ -218,6 +279,6 @@
   </div>
 </footer>
 
-<script src="../app.js?v=3" defer></script>
+<script src="../app.js?v=4" defer></script>
 </body>
 </html>
