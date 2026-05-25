@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#0a0b0f">
 <title>Kymar — 5 minutes a day, measurable ear-training progress</title>
 <meta name="description" content="Daily ear-training practice for musicians. Intervals, chords, melodies, rhythm, timbre. Free on the App Store. Android coming soon.">
-<link rel="stylesheet" href="styles.css?v=8">
+<link rel="stylesheet" href="styles.css?v=9">
 <link rel="canonical" href="https://khalis-ux.github.io/kymar-site/">
 <link rel="alternate" hreflang="en" href="https://khalis-ux.github.io/kymar-site/">
 <link rel="alternate" hreflang="it" href="https://khalis-ux.github.io/kymar-site/it/">
@@ -303,6 +303,43 @@
         </div></div>
         <figcaption><strong>You</strong>Theme, instrument, sync, MIDI input.</figcaption>
       </figure>
+      <!-- Third identical set — extends the track so the loop's
+           half-cycle stride (1 set worth = 1240px) is smaller than
+           the visible viewport on any practical monitor. With only
+           two sets the visible viewport could overrun the right
+           edge of the track right before the wrap, leaving 200+px
+           of empty space that "popped" cards back when the animation
+           reset. Three sets push the safe viewport to ~2480px. -->
+      <figure aria-hidden="true">
+        <div class="phone-frame"><div class="phone-screen">
+          <img src="screenshots/02-train-en.png" alt="" loading="eager" decoding="async">
+        </div></div>
+        <figcaption><strong>Train</strong>Identify intervals by ear.</figcaption>
+      </figure>
+      <figure aria-hidden="true">
+        <div class="phone-frame"><div class="phone-screen">
+          <img src="screenshots/04-stats-en.png" alt="" loading="eager" decoding="async">
+        </div></div>
+        <figcaption><strong>Stats</strong>Per-module accuracy, no inflated celebrations.</figcaption>
+      </figure>
+      <figure aria-hidden="true">
+        <div class="phone-frame"><div class="phone-screen">
+          <img src="screenshots/01-home-en.png" alt="" loading="eager" decoding="async">
+        </div></div>
+        <figcaption><strong>Home</strong>7 trainer modules in one launcher.</figcaption>
+      </figure>
+      <figure aria-hidden="true">
+        <div class="phone-frame"><div class="phone-screen">
+          <img src="screenshots/03-compose-en.png" alt="" loading="eager" decoding="async">
+        </div></div>
+        <figcaption><strong>Compose</strong>Sketch progressions, hear them back.</figcaption>
+      </figure>
+      <figure aria-hidden="true">
+        <div class="phone-frame"><div class="phone-screen">
+          <img src="screenshots/05-you-en.png" alt="" loading="eager" decoding="async">
+        </div></div>
+        <figcaption><strong>You</strong>Theme, instrument, sync, MIDI input.</figcaption>
+      </figure>
     </div>
   </div>
 </section>
@@ -511,6 +548,6 @@
   </div>
 </footer>
 
-<script src="app.js?v=8" defer></script>
+<script src="app.js?v=9" defer></script>
 </body>
 </html>

@@ -540,22 +540,20 @@ a:hover { text-decoration: underline; }
     transparent 0%, #000 6%, #000 94%, transparent 100%);
 }
 
-/* The track holds 10 figures (5 unique × 2 for the loop). For the
-   loop to be visually seamless, the keyframe end position must
-   correspond exactly to "5 cards + 5 gaps" (the half-track stride),
-   so that after the translate the first card of set B (A') lands
-   pixel-precisely where set A's first card (A) started.
-   We previously used `gap: 28px` + `translateX(calc(-50% - 14px))`,
-   where the `-14px` was a hand-rolled half-gap fudge factor — but
-   CSS `gap` only inserts space BETWEEN siblings (9 gaps for 10
-   children), so `-50%` of the track width was "5 cards + 4.5 gaps".
-   The 14px fudge tried to make up for the missing half-gap, but
-   sub-pixel rounding across phone-frame widths accumulated over
-   the 45s cycle and the loop visibly hitched at the wrap point.
-   The fix: drop `gap` entirely, give every figure (including the
-   last) `margin-right: 28px`. Now the track is exactly
-   `10 × (220 + 28) = 2480px` and `-50%` is exactly `5 × 248 = 1240px`
-   — i.e. "5 cards + 5 gaps", the seamless stride, with no fudge. */
+/* The track holds 15 figures (5 unique × 3 identical sets). The
+   loop translates by 1 set's worth per cycle (-33.3333% of 3
+   sets = exactly 1 set = 5 × (220 + 28) = 1240px).
+   Why 3 sets and not 2: with 2 sets the half-track stride is
+   1240px. At wrap-time the visible viewport shows track-x ∈
+   [1240, 1240 + viewport-width]. On any monitor wider than 1240
+   that overruns the right end of the track and leaves an empty
+   strip of bg visible — which on the next loop iteration "fills
+   back in" with cards, giving the user the unmistakable
+   "photos disappear and reappear" effect. Three sets push the
+   safe-viewport ceiling from 1240 to 2480, covering everything
+   short of an ultrawide. Each figure is 248px wide (220 phone-
+   frame + 28 right margin) — fixed via `flex: 0 0 220px` so the
+   stride is byte-precise regardless of figcaption text length. */
 .marquee-track {
   display: flex;
   width: max-content;
@@ -568,7 +566,8 @@ a:hover { text-decoration: underline; }
 }
 @keyframes kymar-scroll {
   from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  /* -33.3333% of the 3-set track = exactly 1 set worth = 1240px. */
+  to   { transform: translateX(-33.3333%); }
 }
 @media (prefers-reduced-motion: reduce) {
   .marquee-track { animation: none; }
