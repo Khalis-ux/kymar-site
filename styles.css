@@ -586,11 +586,22 @@ a:hover { text-decoration: underline; }
                               the last figure so the half-track stride
                               equals "5 cards + 5 gaps" (see kymar-scroll
                               keyframe comment above). */
-  flex: 0 0 auto;
+  /* Fixed width via flex-basis (NOT `flex: 0 0 auto`). With `auto`
+     the figure shrinks to its content's intrinsic width, which is
+     `max(phone-frame, figcaption)` — but figcaption text length
+     varies per card, so each figure's effective width could differ
+     by a few sub-pixels. After 10 figures those rounding errors
+     accumulate and the -50% wrap lands a couple of px off, which
+     reads visually as cards "popping in/out" at the loop point.
+     Pinning every figure to exactly 220px guarantees the half-track
+     stride is 5 × (220 + 28) = 1240px, byte-precise. */
+  flex: 0 0 220px;
+  width: 220px;
   display: flex; flex-direction: column; align-items: center; gap: 14px;
 }
 .marquee .phone-frame {
-  width: 220px;
+  width: 100%;             /* fill the figure's 220px so the bezel
+                              and figcaption share the same width. */
   transition: transform .25s ease, box-shadow .25s ease;
 }
 .marquee .phone-frame:hover {
