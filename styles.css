@@ -973,3 +973,24 @@ a:hover { text-decoration: underline; }
   .hero::before, .hero::after { animation: none; }
   .phone-frame, .faq details, .faq summary::after { transition: none; }
 }
+
+/* ---------- Scroll reveal ----------
+   Blocks fade + rise into place as they scroll into view instead of all
+   appearing at once. The `.reveal` class is added by app.js to below-the-
+   fold targets only (so the deferred init can't cause a flash); `.is-visible`
+   is toggled on entry by an IntersectionObserver. Honours reduced-motion
+   (app.js also skips the whole thing there, belt and braces). */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity .7s cubic-bezier(.16, 1, .3, 1),
+              transform .7s cubic-bezier(.16, 1, .3, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}

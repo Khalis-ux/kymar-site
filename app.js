@@ -80,4 +80,54 @@
       heroFrame.style.transform = '';
     });
   }
+
+  /* ---------- 3. Scroll reveal on entry ---------- */
+  // Blocks fade + rise into place as they scroll into view, instead of the
+  // whole page appearing at once. Targets are below-the-fold content, so
+  // adding the `.reveal` (hidden) class from this deferred script can't
+  // cause a flash; anything already on screen at load is shown at once.
+  // Grids cascade via a small per-item transition-delay. Skipped entirely
+  // under reduced-motion or without IntersectionObserver support.
+  if ('IntersectionObserver' in window
+      && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+
+    // [selector, per-item stagger in ms].
+    const groups = [
+      ['.section-label, .modules-h, .section-sub, .screens h2, .screens-sub, .why-kymar-title, .why-kymar-sub', 0],
+      ['.why-card',     90],
+      ['.module-card',  50],
+      ['.plan',        120],
+    ];
+
+    const targets = [];
+    const seen = new Set();
+    for (const [sel, stagger] of groups) {
+      document.querySelectorAll(sel).forEach((el, i) => {
+        if (seen.has(el)) return;
+        seen.add(el);
+        el.classList.add('reveal');
+        // Cap the cascade so the last card in a long grid isn't left hanging.
+        if (stagger) el.style.transitionDelay = (Math.min(i, 8) * stagger) + 'ms';
+        targets.push(el);
+      });
+    }
+
+    const io = new IntersectionObserver((entries, obs) => {
+      for (const e of entries) {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-visible');
+          obs.unobserve(e.target);   // one-shot — never re-hide on scroll up
+        }
+      }
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.1 });
+
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    for (const el of targets) {
+      const r = el.getBoundingClientRect();
+      // Already visible at load (short viewport / above the fold) → reveal in
+      // the same frame as the hide, so it never flickers.
+      if (r.top < vh && r.bottom > 0) el.classList.add('is-visible');
+      else io.observe(el);
+    }
+  }
 })();
